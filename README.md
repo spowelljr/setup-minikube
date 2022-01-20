@@ -147,6 +147,7 @@ jobs:
         kubernetes-version: v1.22.3
         cpus: 4
         memory: 4000m
+        cni: bridge
       uses: medyagh/setup-minikube@master
     # now you can run kubectl to see the pods in the cluster
     - name: kubectl
