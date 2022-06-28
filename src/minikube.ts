@@ -33,9 +33,21 @@ export async function installCriDocker() {
   const serviceDownload = downloadTool(urlBase + 'cri-docker.service')
   const socketDownload = downloadTool(urlBase + 'cri-docker.socket')
   await exec('chmod', ['+x', await binaryDownload])
-  await mv(await binaryDownload, '/usr/bin/cri-dockerd')
-  await mv(await serviceDownload, '/usr/lib/systemd/system/cri-docker.service')
-  await mv(await socketDownload, '/usr/lib/systemd/system/cri-docker.socket')
+  await exec('sudo', ['mv', await binaryDownload, '/usr/bin/cri-dockerd'])
+  await exec('sudo', [
+    'mv',
+    await serviceDownload,
+    '/usr/lib/systemd/system/cri-docker.service',
+  ])
+  await exec('sudo', [
+    'mv',
+    await socketDownload,
+    '/usr/lib/systemd/system/cri-docker.socket',
+  ])
+  // await mv(await binaryDownload, '/usr/bin/cri-dockerd')
+  // await mv(await serviceDownload,
+  // '/usr/lib/systemd/system/cri-docker.service')
+  // await mv(await socketDownload, '/usr/lib/systemd/system/cri-docker.socket')
 }
 
 export async function startMinikube(): Promise<void> {
