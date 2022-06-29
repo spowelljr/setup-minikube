@@ -44,10 +44,8 @@ export async function installCriDocker() {
     await socketDownload,
     '/usr/lib/systemd/system/cri-docker.socket',
   ])
-  // await mv(await binaryDownload, '/usr/bin/cri-dockerd')
-  // await mv(await serviceDownload,
-  // '/usr/lib/systemd/system/cri-docker.service')
-  // await mv(await socketDownload, '/usr/lib/systemd/system/cri-docker.socket')
+  await exec('sudo', ['apt-get', 'update', '-qq'])
+  await exec('sudo', ['apt-get', '-qq', '-y', 'socat', 'conntrack'])
 }
 
 export async function startMinikube(): Promise<void> {
