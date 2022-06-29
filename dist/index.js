@@ -126,12 +126,7 @@ function installNoneDriverDeps() {
         if (driver !== 'none') {
             return;
         }
-        const a = installCriDocker();
-        const b = installConntrackSocat();
-        const c = installCrictl();
-        yield a;
-        yield b;
-        yield c;
+        yield Promise.all([installCriDocker, installConntrackSocat, installCrictl]);
     });
 }
 exports.installNoneDriverDeps = installNoneDriverDeps;
@@ -139,7 +134,7 @@ function startMinikube() {
     return __awaiter(this, void 0, void 0, function* () {
         const args = ['start', '--wait', 'all'];
         setArgs(args);
-        yield installCriDocker();
+        yield installNoneDriverDeps();
         yield (0, exec_1.exec)('minikube', args);
     });
 }

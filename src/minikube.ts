@@ -65,18 +65,13 @@ export async function installNoneDriverDeps(): Promise<void> {
   if (driver !== 'none') {
     return
   }
-  const a = installCriDocker()
-  const b = installConntrackSocat()
-  const c = installCrictl()
-  await a
-  await b
-  await c
+  await Promise.all([installCriDocker, installConntrackSocat, installCrictl])
 }
 
 export async function startMinikube(): Promise<void> {
   const args = ['start', '--wait', 'all']
   setArgs(args)
-  await installCriDocker()
+  await installNoneDriverDeps()
   await exec('minikube', args)
 }
 
