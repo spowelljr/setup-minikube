@@ -65,7 +65,7 @@ export async function installNoneDriverDeps(): Promise<void> {
   if (driver !== 'none') {
     return
   }
-  await Promise.allSettled([
+  await Promise.all([
     installCriDocker(),
     installConntrackSocat(),
     installCrictl(),
