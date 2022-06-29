@@ -101,8 +101,7 @@ function installCriDocker() {
             '/usr/lib/systemd/system/cri-docker.socket',
         ]);
         yield (0, exec_1.exec)('sudo', ['apt-get', 'update', '-qq']);
-        yield (0, exec_1.exec)('sudo', ['apt-get', '-qq', '-y', 'conntrack']);
-        yield (0, exec_1.exec)('sudo', ['apt-get', '-qq', '-y', 'socat']);
+        yield (0, exec_1.exec)('sudo', ['apt-get', '-qq', '-y', 'install', 'conntrack', 'socat']);
     });
 }
 exports.installCriDocker = installCriDocker;
