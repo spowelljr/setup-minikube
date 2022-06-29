@@ -126,11 +126,7 @@ function installNoneDriverDeps() {
         if (driver !== 'none') {
             return;
         }
-        yield Promise.allSettled([
-            installCriDocker(),
-            installConntrackSocat(),
-            installCrictl(),
-        ]);
+        yield Promise.all([installCriDocker, installConntrackSocat, installCrictl]);
     });
 }
 exports.installNoneDriverDeps = installNoneDriverDeps;
