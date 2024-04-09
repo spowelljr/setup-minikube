@@ -2,6 +2,7 @@ name: "auto-tag-latest"
 on:
   workflow_dispatch:
   release:
+    types: [published]
 jobs:
   auto-tag-latest:
     runs-on: ubuntu-latest
